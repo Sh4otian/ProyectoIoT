@@ -1,4 +1,3 @@
-# ProyectoIoT
 # Sistema IoT de Búsqueda y Clasificación Visual mediante Edge Computing
 
 Sistema IoT capaz de identificar automáticamente la categoría o franquicia a la que pertenece un objeto visual utilizando técnicas de Visión Artificial, Machine Learning y Edge Computing.
@@ -84,7 +83,6 @@ Funciones:
 - Mostrar resultados
 - Indicadores visuales mediante LEDs
 - Interacción mediante botones
-- Integración con sensores adicionales
 
 Comunicación:
 
@@ -117,5 +115,4 @@ Base de Datos
    └── ESP32 DevKit
           │
           ├── OLED
-          ├── LEDs
-          └── Sensores
+          └── LEDs
