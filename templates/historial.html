@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Historial</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+	<table>
+		<tr>
+                        <th>ID</th>
+			<th>Fecha</th>
+			<th>Categoria</th>
+			<th>Confianza</th>
+		</tr>
+
+		{% for fila in Dat %}
+		<tr>
+                        <td>{{ fila[0] }}</td>
+                        <td>{{ fila[1] }}</td>
+                        <td>{{ fila[2] }}</td>
+                        <td>{{ fila[3] }}</td>
+                </tr>
+		{% endfor %}
+
+	</table>
+</body>
+</html>
