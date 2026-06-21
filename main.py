@@ -24,19 +24,15 @@ app = Flask(__name__)
 def Inicio():
 	return render_template("index.html")
 
-@app.route("/configuracion")
+@app.route("/EstadoSis")
 def configuracion():
-	return render_template("configuracion.html")
+	return render_template("EstadoSis.html")
 
 @app.route("/historial")
 def historial():
 	datos = ConsultaTot()
 
 	return render_template("historial.html",Dat=datos)
-
-@app.route("/estadisticas")
-def estadisticas():
-	return render_template("Estadisticas.html")
 
 @app.route("/simular")
 def simular():
