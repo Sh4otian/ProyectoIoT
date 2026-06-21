@@ -1,30 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-      <meta charset="UTF-8">
-      <title>Prueba Servidor </title>
-      <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <meta charset="UTF-8">
+    <title>Clasificador de Franquicias</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
 </head>
 <body>
-	<nav>
-		<a href="/">Inicio</a>
-		<a href="/historial">Historial</a>
-		<a href="/estadisticas">Estadisticas</a>
-		<a href="/configuracion">Configuracion</a>
-	</nav>
-	<h1>Clasificador de Franquicias</h1>
-	<h2>Estado del sistema</h2>
 
-	<ul>
-		<li>Flask Activo</li>
-		<li>MQTT Activo</li>
-		<li>AI Pendiente</li>
-		<li>COMPREN LA WEBCAMMMM</li>
-	</ul>
+<nav>
+    <a href="/">Inicio</a>
+    <a href="/historial">Historial</a>
+    <a href="/configuracion">Estado del Sistema</a>
+</nav>
 
-	<br><br><br>
-	<form action="/simular">
-		<button type="submit"> SIMULAR CLASIFICACION</button>
-	</form>
+<div class="container">
+
+    <div class="card">
+
+        <h1>Clasificador de Franquicias</h1>
+
+        <p style="margin-bottom:25px;">
+            Sistema IoT para clasificación automática de imágenes mediante Inteligencia Artificial.
+        </p>
+
+        <form action="/simular">
+            <button type="submit">
+                Generar Clasificación
+            </button>
+        </form>
+
+    </div>
+
+</div>
+
 </body>
 </html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Estado del Sistema</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<nav>
+    <a href="/">Inicio</a>
+    <a href="/historial">Historial</a>
+    <a href="/configuracion">Estado del Sistema</a>
+</nav>
+
+<div class="container">
+
+    <h1>Estado del Sistema</h1>
+
+    <div class="estado-grid">
+
+        <div class="estado-card">
+            <h3>MQTT</h3>
+            <p>IP: 192.168.1.10</p>
+        </div>
+
+        <div class="estado-card">
+            <h3>Puerto</h3>
+            <p>1883</p>
+        </div>
+
+        <div class="estado-card">
+            <h3>Cámara</h3>
+            <p>Conectada</p>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

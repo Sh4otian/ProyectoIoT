@@ -1,29 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Historial</title>
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Historial</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
-	<table>
-		<tr>
-                        <th>ID</th>
-			<th>Fecha</th>
-			<th>Categoria</th>
-			<th>Confianza</th>
-			<th>Imagenes</th>
-		</tr>
 
-		{% for fila in Dat %}
-		<tr>
-                        <td>{{ fila[0] }}</td>
-                        <td>{{ fila[1] }}</td>
-                        <td>{{ fila[2] }}</td>
-                        <td>{{ fila[3] }}</td>
-                        <td>{{ fila[4] }}</td>
-                </tr>
-		{% endfor %}
+<nav>
+    <a href="/">Inicio</a>
+    <a href="/historial">Historial</a>
+    <a href="/configuracion">Estado del Sistema</a>
+</nav>
 
-	</table>
+<div class="container">
+
+    <h1>Historial de Clasificaciones</h1>
+
+    <table>
+
+        <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Categoría</th>
+            <th>Confianza</th>
+            <th>Imagen</th>
+        </tr>
+
+        {% for fila in Dat %}
+        <tr>
+            <td>{{ fila[0] }}</td>
+            <td>{{ fila[1] }}</td>
+            <td>{{ fila[2] }}</td>
+            <td>{{ fila[3] }}%</td>
+            <td>{{ fila[4] }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</div>
+
 </body>
 </html>
