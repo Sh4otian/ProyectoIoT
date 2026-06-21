@@ -6,12 +6,12 @@ RutaDB="BD/Franquicias.db"
 def Conectar():
 	return sqlite3.connect(RutaDB)
 
-def GuardarRes(categoria, confianza):
+def GuardarRes(imagen, categoria, confianza):
 	conexion = Conectar()
 	cursor = conexion.cursor()
 	fecha = datetime.now().strftime("%Y-%m-%d %H:%M-%S")
 
-	cursor.execute("""INSERT INTO Historial(Fecha,Categoria, Confianza) VALUES (?,?,?) """,(fecha,categoria,confianza))
+	cursor.execute("""INSERT INTO Historial(Fecha,Categoria, Confianza, Imagen) VALUES (?,?,?,?) """,(fecha,categoria,confianza,imagen))
 	conexion.commit()
 	conexion.close()
 
