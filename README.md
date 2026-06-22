@@ -12,6 +12,22 @@ Desarrollar un sistema IoT capaz de identificar automáticamente la categoría a
 
 ---
 
+## Requisitos
+
+Antes de empezar, asegúrate de tener instalado:
+
+- Docker
+- Docker Compose
+
+---
+
+## Instalación y ejecución
+
+Para ejecutar el proyecto completo (construcción de imágenes y levantamiento de servicios), usa el siguiente comando:
+
+```bash
+docker compose up --build
+```
 ## Arquitectura del Sistema
 
 ![Arquitectura del Sistema](Imagenes/diagramaProyecto.jpeg)
