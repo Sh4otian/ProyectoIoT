@@ -1,0 +1,27 @@
+# Entornos virtuales
+venv/
+env/
+.venv/
+
+# Cache de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Git
+.git/
+.gitignore
+
+# Carpeta de uploads (se usa volumen en runtime)
+uploads/
+
+# Imágenes de prueba (opcionales, comentar si las quieres incluir)
+ModelIA/Pruebas/
+
+# Archivos de distribución
+dist/
+build/
+*.egg-info/
+
+# Docker (no incluir el compose en la imagen)
+docker-compose.yml

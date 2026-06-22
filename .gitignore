@@ -11,4 +11,5 @@ __pycache__/
 #archivos de distribucion
 dist/
 build/
+uploads/
 *.egg-info/
