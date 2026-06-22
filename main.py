@@ -1,13 +1,17 @@
 from flask import Flask,render_template
 from BD.db import ConsultaTot
 from ModelIA.PruebaIA import clasificar_img
-from mqtt.mqtt_client import PublicarCat
-from BD.db import GuardarRes
+from mqtt.mqtt_client import PublicarCat,EstadoMQTT
+from BD.db import GuardarRes,EstadoDB
 
 import os
 import random
 
 Carpeta = "ModelIA/Pruebas"
+
+def SysEdo():
+	mqtt=EstadoMQTT()
+	return {"mqtt":mqtt,"BD":EstadoDB(),"Camara":{"Estado":"INEXISTENTE"}, "Flask":"ACTIVO"}
 
 def ImgAle():
 	archivos = [f for f in os.listdir(Carpeta)
@@ -26,7 +30,8 @@ def Inicio():
 
 @app.route("/EstadoSis")
 def configuracion():
-	return render_template("EstadoSis.html")
+	estado= SysEdo()
+	return render_template("EstadoSis.html", estado=estado)
 
 @app.route("/historial")
 def historial():

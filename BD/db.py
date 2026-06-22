@@ -23,3 +23,13 @@ def ConsultaTot():
 	datos = cursor.fetchall()
 	conexion.close()
 	return datos
+	
+def EstadoDB():
+	try:
+		conn = Conectar()
+		conn.execute("SELECT 1")
+		conn.close()
+		
+		return "Conectada"
+	except:
+		return "Error"

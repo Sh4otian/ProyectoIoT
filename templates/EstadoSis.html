@@ -22,18 +22,33 @@
 
         <div class="estado-card">
             <h3>MQTT</h3>
-            <p>IP: 192.168.1.10</p>
+            <p>{{ estado.mqtt.estado }}</p>
+        </div>
+
+        <div class="estado-card">
+            <h3>Ip</h3>
+            <p>{{ estado.mqtt.ip }}</p>
         </div>
 
         <div class="estado-card">
             <h3>Puerto</h3>
-            <p>1883</p>
+            <p>{{ estado.mqtt.puerto }}</p>
         </div>
 
         <div class="estado-card">
             <h3>Cámara</h3>
-            <p>Conectada</p>
+            <p>{{ estado.Camara.Estado }}</p>
         </div>
+        <div class="estado-card">
+            <h3>FLASK</h3>
+            <p>{{ estado.Flask }}</p>
+        </div>
+        <div class="estado-card">
+            <h3>Base De Datos</h3>
+            <p>{{ estado.BD }}</p>
+        </div>
+
+
 
     </div>
 
