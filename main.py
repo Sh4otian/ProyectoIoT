@@ -1,8 +1,7 @@
-from flask import Flask,render_template
-from BD.db import ConsultaTot
+from flask import Flask,render_template, request
+from BD.db import ConsultaTot,GuardarRes,EstadoDB
 from ModelIA.PruebaIA import clasificar_img
 from mqtt.mqtt_client import PublicarCat,EstadoMQTT
-from BD.db import GuardarRes,EstadoDB
 
 import os
 import random
@@ -23,7 +22,9 @@ def ImgAle():
 	return os.path.join(Carpeta, seleccion)
 
 app = Flask(__name__)
+UPLOAD_FOLDER = "uploads"
 
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 @app.route("/")
 def Inicio():
 	return render_template("index.html")
@@ -39,20 +40,40 @@ def historial():
 
 	return render_template("historial.html",Dat=datos)
 
-@app.route("/simular")
+@app.route("/simular", methods=["POST"])
 def simular():
-	path = ImgAle()
-	
-	if path is None:
-		return "No hay Imagenes en la carpeta"
 
-	categoria, confianza = clasificar_img(path)
+    if "imagen" not in request.files:
+        return "No se recibio ninguna imagen"
 
-	PublicarCat(categoria)
-	GuardarRes(path,categoria,confianza)
-	return f"""Simulacion realizada
-		Imagen: {path}<br>
-		Resultado: {categoria} ({confianza:.2f}%)"""
+    archivo = request.files["imagen"]
 
+    if archivo.filename == "":
+        return "No se selecciono archivo"
+
+    ruta = os.path.join(
+        UPLOAD_FOLDER,
+        archivo.filename
+    )
+
+    archivo.save(ruta)
+
+    categoria, confianza = clasificar_img(ruta)
+
+    PublicarCat(categoria)
+
+    GuardarRes(
+        ruta,
+        categoria,
+        confianza
+    )
+
+    return f"""
+        Clasificacion realizada<br><br>
+
+        Archivo: {archivo.filename}<br>
+        Categoroa: {categoria}<br>
+        Confianza: {confianza:.2f}%<br>
+    """
 if __name__== "__main__":
 	app.run(host="0.0.0.0", port=5000,debug=True)

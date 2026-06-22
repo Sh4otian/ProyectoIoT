@@ -18,16 +18,30 @@
     <div class="card">
 
         <h1>Clasificador de Franquicias</h1>
+	
 
+	<div class="placeholder">
+		Area Reservada para visualizacion de Camara
+	</div>
         <p style="margin-bottom:25px;">
             Sistema IoT para clasificación automática de imágenes mediante Inteligencia Artificial.
         </p>
 
-        <form action="/simular">
-            <button type="submit">
-                Generar Clasificación
-            </button>
-        </form>
+       <form action="/simular" method="POST" enctype="multipart/form-data">
+
+    <input
+        type="file"
+        name="imagen"
+        accept=".jpg,.jpeg,.png"
+        required>
+
+    <br><br>
+
+    <button type="submit">
+        Clasificar Imagen
+    </button>
+
+</form>
 
     </div>
 
