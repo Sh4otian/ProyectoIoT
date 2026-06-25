@@ -1,6 +1,6 @@
 services:
 
-  # Broker MQTT Mosquitto
+  # ── Broker MQTT Mosquitto ──────────────────────────────────────────────────
   mosquitto:
     image: eclipse-mosquitto:2
     container_name: iot-mosquitto
@@ -10,7 +10,7 @@ services:
       - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
     restart: unless-stopped
 
-  # Aplicación Flask + IA
+  # ── Aplicación Flask + IA + OpenCV ────────────────────────────────────────
   app:
     build: .
     container_name: iot-flask
@@ -19,8 +19,13 @@ services:
     environment:
       - MQTT_HOST=mosquitto        # nombre del servicio en la red de Compose
     volumes:
-      - uploads_data:/app/uploads  # imágenes subidas persisten entre reinicios
+      - uploads_data:/app/uploads  # imágenes capturadas persisten entre reinicios
       - bd_data:/app/BD            # historial SQLite persiste entre reinicios
+    devices:
+      # Cámara USB o integrada del host → contenedor
+      # Si tienes más cámaras agrega /dev/video1:/dev/video1, etc.
+      # Si no hay cámara, comenta estas líneas; la app muestra un placeholder.
+      - /dev/video0:/dev/video0
     depends_on:
       - mosquitto
     restart: unless-stopped

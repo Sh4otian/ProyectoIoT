@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Clasificador de Franquicias</title>
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
@@ -14,38 +14,79 @@
 </nav>
 
 <div class="container">
-
     <div class="card">
 
         <h1>Clasificador de Franquicias</h1>
-	
 
-	<div class="placeholder">
-		Area Reservada para visualizacion de Camara
-	</div>
-        <p style="margin-bottom:25px;">
+        <!-- ── Feed de cámara en vivo (OpenCV → MJPEG) ── -->
+        <div class="camera-wrapper">
+            <img id="camFeed"
+                 src="/video_feed"
+                 alt="Feed de cámara en vivo">
+            <div class="camera-label">Cámara en vivo</div>
+        </div>
+
+        <p class="desc">
             Sistema IoT para clasificación automática de imágenes mediante Inteligencia Artificial.
+            Captura un frame de la cámara o sube una imagen para clasificar.
         </p>
 
-       <form action="/simular" method="POST" enctype="multipart/form-data">
+        <!-- ── Botón principal: captura frame y clasifica ── -->
+        <button id="btnCapturar" class="btn-capturar" onclick="capturarCamara()">
+            Capturar y Clasificar
+        </button>
 
-    <input
-        type="file"
-        name="imagen"
-        accept=".jpg,.jpeg,.png"
-        required>
+        <!-- ── Resultado de la clasificación ── -->
+        <div id="resultado" class="resultado"></div>
 
-    <br><br>
+        <!-- ── Separador ── -->
+        <div class="separador"><span>— o subir imagen manualmente —</span></div>
 
-    <button type="submit">
-        Clasificar Imagen
-    </button>
-
-</form>
+        <!-- ── Formulario de subida manual (funcionalidad original) ── -->
+        <form action="/simular" method="POST" enctype="multipart/form-data">
+            <input type="file" name="imagen" accept=".jpg,.jpeg,.png" required>
+            <br><br>
+            <button type="submit" class="btn-archivo">Clasificar desde archivo</button>
+        </form>
 
     </div>
-
 </div>
+
+<script>
+async function capturarCamara() {
+    const btn = document.getElementById('btnCapturar');
+    const res = document.getElementById('resultado');
+
+    // Estado de carga
+    btn.disabled = true;
+    btn.textContent = ' Clasificando…';
+    res.className = 'resultado';
+    res.innerHTML = '';
+
+    try {
+        const response = await fetch('/capturar', { method: 'POST' });
+        const data = await response.json();
+
+        if (data.error) {
+            res.className = 'resultado resultado--error';
+            res.innerHTML = `<strong>Error:</strong> ${data.error}`;
+        } else {
+            res.className = 'resultado resultado--ok';
+            res.innerHTML = `
+                ✅ <strong>Clasificación completada</strong><br>
+                Categoría: <em>${data.categoria}</em><br>
+                Confianza: <em>${data.confianza}%</em>
+            `;
+        }
+    } catch (err) {
+        res.className = 'resultado resultado--error';
+        res.innerHTML = 'Error de conexión con el servidor';
+    } finally {
+        btn.disabled = false;
+        btn.textContent = 'Capturar y Clasificar';
+    }
+}
+</script>
 
 </body>
 </html>
